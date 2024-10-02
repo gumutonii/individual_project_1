@@ -8,6 +8,7 @@ void main() {
 
 class TempConverterApp extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Temperature Converter',
@@ -40,26 +41,34 @@ class _TemperatureConverterScreenState
       // Fahrenheit to Celsius
       convertedTemp = (inputTemp - 32) * 5 / 9;
       conversionResult =
-          'F to C: ${inputTemp.toStringAsFixed(1)} => ${convertedTemp.toStringAsFixed(2)}°C';
+          'F to C: ${inputTemp.toStringAsFixed(1)} = ${convertedTemp.toStringAsFixed(2)}°C';
     } else {
-      // Celsius to Fahrenheitttt
+      // Celsius to Fahrenheit
       convertedTemp = inputTemp * 9 / 5 + 32;
       conversionResult =
-          'C to F: ${inputTemp.toStringAsFixed(1)} => ${convertedTemp.toStringAsFixed(2)}°F';
+          'C to F: ${inputTemp.toStringAsFixed(1)} = ${convertedTemp.toStringAsFixed(2)}°F';
     }
-   // usestatee 
+
+    // use setState to update the result and history
     setState(() {
       _result = conversionResult;
       _history.add(conversionResult);
     });
   }
 
-// building interface
+  // building interface
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Temperature Converter'),
+        title: Text('Temperature Converter',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            )),
+        backgroundColor: Colors.blue[800],
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -106,6 +115,9 @@ class _TemperatureConverterScreenState
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: _convertTemperature,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+              ),
               child: Text('Convert'),
             ),
             SizedBox(height: 20),
@@ -115,7 +127,7 @@ class _TemperatureConverterScreenState
             ),
             Text(
               _result,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 20),
             Text(
@@ -127,7 +139,10 @@ class _TemperatureConverterScreenState
                 itemCount: _history.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(_history[index]),
+                    title: Text(
+                      _history[index],
+                      style: TextStyle(fontSize: 20), // Increased font size for history
+                    ),
                   );
                 },
               ),
